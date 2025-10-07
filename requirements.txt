@@ -1,0 +1,6 @@
+os
+csv
+kagglehub
+pandas
+psycopg2
+python-dotenv
