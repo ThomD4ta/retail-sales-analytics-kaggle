@@ -87,8 +87,8 @@ try:
             df[final_columns].to_csv(buf, index=False, header=True)
             buf.seek(0)
 
-            # Optional: truncate or append. Here we append. To replace data use TRUNCATE first.
-            # cur.execute(sql.SQL("TRUNCATE TABLE {}.{}").format(sql.Identifier(PG_SCHEMA), sql.Identifier(TABLE)))
+            # Optional: truncate or append. Here we append. To replace data and has the DS data updated, use TRUNCATE first.
+            cur.execute(sql.SQL("TRUNCATE TABLE {}.{}").format(sql.Identifier(PG_SCHEMA), sql.Identifier(TABLE)))
             copy_sql = sql.SQL("COPY {}.{} ({}) FROM STDIN WITH CSV HEADER").format(
                 sql.Identifier(PG_SCHEMA),
                 sql.Identifier(TABLE),
