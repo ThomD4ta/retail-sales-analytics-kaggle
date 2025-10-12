@@ -38,7 +38,7 @@ def format_sql_filename(filename):
     return " ".join(clean_parts).title()
 
 # 5. Assign your SQL queries to easy variable names
-file_query_1 = "05_dataset_quick_sample.sql"
+file_query_1 = "05_bi_dataset_quick_sample.sql"
 
 # Optional: you can change BASE_DIR to "sql_queries" if needed
 file_query_2 = "01_view_dataset_totals.sql"
@@ -73,12 +73,12 @@ print(df_query_2.head())
 
 
 # ========================================================================================================
-# 9. Optional — Save to CSV for later use
-#OUTPUT_DIR = os.path.join(BASE_DIR, "data_outputs")
-#os.makedirs(OUTPUT_DIR, exist_ok=True)
+# 9. Optional — Save to CSV for later use (now stores in data_outputs/sql_manual_runs)
+OUTPUT_DIR = os.path.join(BASE_DIR, "data_outputs", "sql_manual_runs")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-#df_query_1.to_csv(os.path.join(OUTPUT_DIR, f"{os.path.splitext(file_query_1)[0]}.csv"), index=False)
-#df_query_2.to_csv(os.path.join(OUTPUT_DIR, f"{os.path.splitext(file_query_2)[0]}.csv"), index=False)
+df_query_1.to_csv(os.path.join(OUTPUT_DIR, f"{os.path.splitext(file_query_1)[0]}.csv"), index=False)
+df_query_2.to_csv(os.path.join(OUTPUT_DIR, f"{os.path.splitext(file_query_2)[0]}.csv"), index=False)
 
 # ========================================================================================================
 
