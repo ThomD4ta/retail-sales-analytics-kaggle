@@ -5,8 +5,8 @@
 
 -- Counting top N total_amount values, showing outliers count under $60 (p25)
 SELECT
-  total_amount,
-  COUNT(*) AS total_count
+  total_amount as top_orders_min_amount,
+  COUNT(*) AS total_orders_same_amount
 FROM public.retail_sales
 WHERE total_amount < 60
 GROUP BY total_amount

@@ -10,7 +10,7 @@ WITH total_agg_g AS (
   SELECT
     product_category,
     SUM(total_amount) AS total_sales,
-    SUM(quantity) AS total_qty,	
+    SUM(quantity) AS total_qty_sold,	
     COUNT(*) FILTER (WHERE lower(trim(gender)) = 'male') AS transactions_male,
     SUM(quantity) FILTER (WHERE lower(trim(gender)) = 'male') AS t_quantity_male,
     SUM(total_amount) FILTER (WHERE lower(trim(gender)) = 'male') AS t_amount_male,
@@ -23,7 +23,7 @@ WITH total_agg_g AS (
 SELECT
   product_category,
   total_sales,
-  total_qty,
+  total_qty_sold,
   transactions_male,
   t_quantity_male,
   t_amount_male,

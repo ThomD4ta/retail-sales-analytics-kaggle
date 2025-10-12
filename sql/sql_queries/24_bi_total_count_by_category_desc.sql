@@ -1,3 +1,8 @@
+-- ===========================================
+-- 24_bi_total_count_by_category_desc.sql
+-- Purpose: Business data insights
+-- ===========================================
+
 -- Total Count by Category DESC, total values and unique category count
 WITH per_cat AS (
   SELECT
@@ -9,14 +14,14 @@ WITH per_cat AS (
 ),
 totals AS (
   SELECT
-    SUM(order_cnt_by_cat)           AS orders_by_category,
+    SUM(order_cnt_by_cat)           AS orders_by_category_totals,
     COUNT(*)           AS distinct_categories
   FROM per_cat
 )
 SELECT
   per_cat.product_category,
   per_cat.order_cnt_by_cat,
-  totals.orders_by_category,
+  totals.orders_by_category_totals,
   totals.distinct_categories
 FROM per_cat
 CROSS JOIN totals

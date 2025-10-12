@@ -10,7 +10,7 @@ SELECT
   date_trunc('month', date)::date AS month,
   COUNT(transaction_id) as total_transactions,
   SUM(total_amount) as total_sales,
-  SUM(quantity) as total_qty
+  SUM(quantity) as total_qty_sold
 FROM retail_sales
 GROUP BY month
 ORDER BY month;

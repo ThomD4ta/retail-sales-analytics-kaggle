@@ -274,63 +274,64 @@ def build_report():
         return
 
     excel_path = REPORTS_DIR / "report_ecom_kaggle.xlsx"
-    excel_writer = pd.ExcelWriter(excel_path, engine="openpyxl")
 
-    for name, df in datasets.items():
-        # write dataset to Excel sheet (truncate sheet name to 31 chars)
-        safe_sheet = name[:31]
-        try:
-            df.to_excel(excel_writer, sheet_name=safe_sheet, index=False)
-        except Exception as e:
-            print(f"⚠️ Could not write {safe_sheet} to Excel: {e}", file=sys.stderr)
+    # ===== IMPROVEMENT NOTE =====
+    # Using a single 'with pd.ExcelWriter' context to write all datasets to separate sheets.
+    # This prevents overwriting, ensures proper file closure, and avoids PermissionError on Windows.
+    with pd.ExcelWriter(excel_path, engine="openpyxl") as excel_writer:
+        for name, df in datasets.items():
+            sheet_name = name[:31]  # Excel sheet name limit
+            try:
+                df.to_excel(excel_writer, sheet_name=sheet_name, index=False)
+                print(f"📄 Sheet added: {sheet_name}")
+            except Exception as e:
+                print(f"⚠️ Could not write {sheet_name}: {e}", file=sys.stderr)
 
-        # detect simple KPIs and print to console (no HTML)
-        for candidate in ("total_amount", "revenue", "amount", "sales", "total"):
-            match = [c for c in df.columns if c.lower() == candidate]
-            if match:
-                col = match[0]
-                total = pd.to_numeric(df[col], errors="coerce").sum(skipna=True)
-                print(f"🔢 KPI for {name}: {col} sum = {total:,.2f}")
+            # detect simple KPIs and print to console
+            for candidate in ("total_amount", "revenue", "amount", "sales", "total"):
+                match = [c for c in df.columns if c.lower() == candidate]
+                if match:
+                    col = match[0]
+                    total = pd.to_numeric(df[col], errors="coerce").sum(skipna=True)
+                    print(f"🔢 KPI for {name}: {col} sum = {total:,.2f}")
 
-        # timeseries chart
-        date_col = try_parse_date_column(df)
-        num_cols = numeric_columns(df)
-        if date_col and num_cols:
-            metric = next((c for c in df.columns if c.lower() in ("total_amount", "revenue", "amount", "sales", "total")), num_cols[0])
-            fig = timeseries_plot(df, date_col, metric)
-            img_name = f"{name}_timeseries.png"
-            img_path = CHARTS_DIR / img_name
-            safe_save_png(fig, img_path)
-            print(f"📈 Saved timeseries chart: {img_path}")
-
-        else:
-            print(f"ℹ️ No timeseries for {name} (missing date or numeric metric).")
-
-        # top N by category
-        cat_candidates = [c for c in df.columns if df[c].dtype == object and df[c].nunique() < 200]
-        if cat_candidates and num_cols:
-            cat_col = cat_candidates[0]
-            metric = next((c for c in df.columns if c.lower() in ("total_amount", "revenue", "amount", "sales", "total")), None)
-            if metric is None and num_cols:
-                metric = num_cols[0]
-            if metric:
-                fig = top_n_barplot(df, cat_col, metric, n=10)
-                img_name = f"{name}_top10_{cat_col}.png"
+            # timeseries chart
+            date_col = try_parse_date_column(df)
+            num_cols = numeric_columns(df)
+            if date_col and num_cols:
+                metric = next(
+                    (c for c in df.columns if c.lower() in ("total_amount", "revenue", "amount", "sales", "total")),
+                    num_cols[0]
+                )
+                fig = timeseries_plot(df, date_col, metric)
+                img_name = f"{name}_timeseries.png"
                 img_path = CHARTS_DIR / img_name
                 safe_save_png(fig, img_path)
-                print(f"📊 Saved top-N chart: {img_path}")
-        else:
-            print(f"ℹ️ No categorical top-10 generated for {name}.")
+                print(f"📈 Saved timeseries chart: {img_path}")
+            else:
+                print(f"ℹ️ No timeseries for {name} (missing date or numeric metric).")
 
-    # finalize Excel workbook
-    try:
-        with pd.ExcelWriter(excel_path, engine="openpyxl") as excel_writer:
-            df.to_excel(excel_writer, sheet_name="Sheet1", index=False)
-        print(f"✅ Excel report saved to: {excel_path}")
-    except Exception as e:
-        print(f"⚠️ Failed to save Excel workbook: {e}", file=sys.stderr)
+            # top N by category
+            cat_candidates = [c for c in df.columns if df[c].dtype == object and df[c].nunique() < 200]
+            if cat_candidates and num_cols:
+                cat_col = cat_candidates[0]
+                metric = next(
+                    (c for c in df.columns if c.lower() in ("total_amount", "revenue", "amount", "sales", "total")),
+                    None
+                )
+                if metric is None and num_cols:
+                    metric = num_cols[0]
+                if metric:
+                    fig = top_n_barplot(df, cat_col, metric, n=10)
+                    img_name = f"{name}_top10_{cat_col}.png"
+                    img_path = CHARTS_DIR / img_name
+                    safe_save_png(fig, img_path)
+                    print(f"📊 Saved top-N chart: {img_path}")
+            else:
+                print(f"ℹ️ No categorical top-10 generated for {name}.")
 
-
+    print(f"✅ Excel report saved to: {excel_path}")
+    
 # =========================================================
 # 5️⃣ Script entry point
 # =========================================================
