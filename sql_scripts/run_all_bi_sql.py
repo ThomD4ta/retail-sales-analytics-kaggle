@@ -84,7 +84,7 @@ def find_bi_and_view_sql_files(*folders):
 # ============================================================
 # 5️⃣ Main function to run BI SQL files
 # ============================================================
-def run():
+def run_all_bi_queries():
      # Step 5.1 — Find all _bi_ and _view_ SQL files
     sql_files = find_bi_and_view_sql_files(SQL_QUERIES_DIR, VIEWS_DIR)
     if not sql_files:
@@ -141,4 +141,4 @@ def run():
 # 6️⃣ Run script
 # ============================================================
 if __name__ == "__main__":
-    run()
+    run_all_bi_queries()

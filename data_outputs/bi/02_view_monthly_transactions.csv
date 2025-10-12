@@ -1,4 +1,4 @@
-month,total_transactions,total_sales,total_qty
+month,total_transactions,total_sales,total_qty_sold
 2023-01-01,76,35450.0,195
 2023-02-01,85,44060.0,214
 2023-03-01,73,28990.0,194

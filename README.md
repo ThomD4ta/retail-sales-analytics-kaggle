@@ -1,7 +1,16 @@
 # retail-sales-analytics-kaggle
 Case Study: API/html Request + Exploratory Data Analysis + Report + Dashboard
 
-# Retail Sales → PostgreSQL (pgAdmin) Pipeline
+1. Run sales_to_pgadmin logic
+2. Run all BI SQL queries (CSV export)
+3. Run report builder (Excel + charts)
+
+[Kaggle Dataset] --> [Sales_to_pgadmin.py] --> [Postgres DB]
+                                            \
+                                             -> [run_all_bi_sql.py] --> [CSV outputs]
+                                                                            \
+                                                                             -> [Kaggle_ecom_report.py] --> [Excel + charts]
+
 
 **TL;DR:** Request downloads a retail sales dataset from Kaggle, normalizes the CSV, 
 and bulk loads the data into a PostgreSQL table (`retail_sales`) using Python + `psycopg2`. 

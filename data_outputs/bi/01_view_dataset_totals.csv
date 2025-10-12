@@ -1,2 +1,2 @@
-total_transactions,total_customers,total_sales,total_items_sold,avg_age,avg_order_amount
+total_transactions,total_customers,total_sales,total_items_sold,avg_customer_age,avg_order_amount
 1000,1000,456000.0,2514,41.392,456.0

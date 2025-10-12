@@ -27,7 +27,7 @@ import os
 import sys
 
 # =========================================================
-# 1️⃣ Configuration — Edit these
+# 1. Configuration — Edit these
 # =========================================================
 BASE_DIR = Path(__file__).resolve().parents[1]      # project/
 BI_CSV_DIR = BASE_DIR / "data_outputs" / "bi"       # where CSVs are stored
@@ -50,11 +50,12 @@ MANUAL_CSV_LIST = [
 "24_bi_total_count_by_category_desc.csv",
 "03_view_product_category_performance.csv",
 "18_bi_top_5_max_orders_by_total_amount.csv",
-"19_bi_top_5_min_orders_by_total_amount.csv"
+"19_bi_top_5_min_orders_by_total_amount.csv",
+"17_bi_percentiles_outliers_total_amount.csv"
 ]
 
 # =========================================================
-# 2️⃣ Helper functions — detailed notes for each function
+# 2. Helper functions — detailed notes for each function
 # =========================================================
 
 def safe_read_csv(path: Path) -> pd.DataFrame:
@@ -204,7 +205,7 @@ def top_n_barplot(df: pd.DataFrame, group_col: str, value_col: str, n: int = 10)
 
 
 # =========================================================
-# 3️⃣ Gather CSVs (manual list or all)
+# 3. Gather CSVs (manual list or all)
 # =========================================================
 def gather_datasets(bi_csv_dir: Path, manual_list):
     """
@@ -250,9 +251,13 @@ def gather_datasets(bi_csv_dir: Path, manual_list):
 
 
 # =========================================================
-# 4️⃣ Build the report (no HTML, Excel + charts only)
+# 4. Build the report (no HTML, Excel + charts only)
 # =========================================================
-def build_report():
+    # base_dir and manual_csv_list addtion
+def build_report(  
+    base_dir: Path = None,
+    manual_csv_list: list = None
+):
     """
     Main entry point to build the Excel report and save charts.
 
@@ -331,9 +336,9 @@ def build_report():
                 print(f"ℹ️ No categorical top-10 generated for {name}.")
 
     print(f"✅ Excel report saved to: {excel_path}")
-    
+
 # =========================================================
-# 5️⃣ Script entry point
+# 5. Script entry point
 # =========================================================
 if __name__ == "__main__":
     build_report()
