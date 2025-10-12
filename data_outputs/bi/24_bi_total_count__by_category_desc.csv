@@ -1,0 +1,4 @@
+product_category,cnt,rows_with_category,distinct_categories
+Clothing,351,1000.0,3
+Electronics,342,1000.0,3
+Beauty,307,1000.0,3

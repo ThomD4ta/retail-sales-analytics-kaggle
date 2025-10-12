@@ -1,0 +1,4 @@
+product_category,total_sales,total_qty,transactions_male,t_quantity_male,t_amount_male,pct_t_male,transactions_female,t_quantity_female,t_amount_female,pct_t_female
+Electronics,156905.0,849,172,410,80170.0,51.09461138905707,170,439,76735.0,48.90538861094293
+Clothing,155580.0,894,177,453,74305.0,47.75999485795089,174,441,81275.0,52.24000514204911
+Beauty,143515.0,771,141,353,68685.0,47.859108803957774,166,418,74830.0,52.140891196042226

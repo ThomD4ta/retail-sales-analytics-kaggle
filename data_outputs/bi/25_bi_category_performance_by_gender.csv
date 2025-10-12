@@ -1,0 +1,7 @@
+product_category,gender,total_sales_by_gender,transactions_count,category_total,quantity_sold,pct_of_category
+Beauty,Female,74830.0,166,143515.0,771,52.140891196042226
+Beauty,Male,68685.0,141,143515.0,771,47.859108803957774
+Clothing,Female,81275.0,174,155580.0,894,52.24000514204911
+Clothing,Male,74305.0,177,155580.0,894,47.75999485795089
+Electronics,Male,80170.0,172,156905.0,849,51.09461138905707
+Electronics,Female,76735.0,170,156905.0,849,48.90538861094293
