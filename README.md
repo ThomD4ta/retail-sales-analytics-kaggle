@@ -1,15 +1,15 @@
 # retail-sales-analytics-kaggle
-Case Study: API/html Request + Exploratory Data Analysis + Report + Dashboard
+Case Study: API/html Request + Exploratory Data Analysis + Report + Power BI Dashboard
 
 1. Run sales_to_pgadmin logic
 2. Run all BI SQL queries (CSV export)
-3. Run report builder (Excel + charts)
+3. Run report builder (Excel)
 
 [Kaggle Dataset] --> [Sales_to_pgadmin.py] --> [Postgres DB]
                                             \
                                              -> [run_all_bi_sql.py] --> [CSV outputs]
                                                                             \
-                                                                             -> [Kaggle_ecom_report.py] --> [Excel + charts]
+                                                                             -> [Kaggle_ecom_report.py] --> [Excel]
 
 
 **TL;DR:** Request downloads a retail sales dataset from Kaggle, normalizes the CSV, 
