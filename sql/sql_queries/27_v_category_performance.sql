@@ -1,5 +1,5 @@
 -- ===========================================
--- 27_bi_view_category_performance.sql
+-- 27_view_category_performance.sql
 -- Purpose: Business data insights
 -- ===========================================
 

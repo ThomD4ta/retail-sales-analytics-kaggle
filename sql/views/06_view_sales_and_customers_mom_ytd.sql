@@ -1,0 +1,1 @@
+SELECT * FROM sales_and_customers_mom_ytd;

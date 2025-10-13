@@ -51,7 +51,10 @@ MANUAL_CSV_LIST = [
 "03_view_product_category_performance.csv",
 "18_bi_top_5_max_orders_by_total_amount.csv",
 "19_bi_top_5_min_orders_by_total_amount.csv",
-"17_bi_percentiles_outliers_total_amount.csv"
+"17_bi_percentiles_outliers_total_amount.csv",
+"04_view_monthly_mom",
+"05_view_monthly_ytd_performance",
+"06_view_sales_and_customers_mom_ytd"
 ]
 
 # =========================================================
@@ -291,49 +294,6 @@ def build_report(
                 print(f"📄 Sheet added: {sheet_name}")
             except Exception as e:
                 print(f"⚠️ Could not write {sheet_name}: {e}", file=sys.stderr)
-
-            # detect simple KPIs and print to console
-            for candidate in ("total_amount", "revenue", "amount", "sales", "total"):
-                match = [c for c in df.columns if c.lower() == candidate]
-                if match:
-                    col = match[0]
-                    total = pd.to_numeric(df[col], errors="coerce").sum(skipna=True)
-                    print(f"🔢 KPI for {name}: {col} sum = {total:,.2f}")
-
-            # timeseries chart
-            date_col = try_parse_date_column(df)
-            num_cols = numeric_columns(df)
-            if date_col and num_cols:
-                metric = next(
-                    (c for c in df.columns if c.lower() in ("total_amount", "revenue", "amount", "sales", "total")),
-                    num_cols[0]
-                )
-                fig = timeseries_plot(df, date_col, metric)
-                img_name = f"{name}_timeseries.png"
-                img_path = CHARTS_DIR / img_name
-                safe_save_png(fig, img_path)
-                print(f"📈 Saved timeseries chart: {img_path}")
-            else:
-                print(f"ℹ️ No timeseries for {name} (missing date or numeric metric).")
-
-            # top N by category
-            cat_candidates = [c for c in df.columns if df[c].dtype == object and df[c].nunique() < 200]
-            if cat_candidates and num_cols:
-                cat_col = cat_candidates[0]
-                metric = next(
-                    (c for c in df.columns if c.lower() in ("total_amount", "revenue", "amount", "sales", "total")),
-                    None
-                )
-                if metric is None and num_cols:
-                    metric = num_cols[0]
-                if metric:
-                    fig = top_n_barplot(df, cat_col, metric, n=10)
-                    img_name = f"{name}_top10_{cat_col}.png"
-                    img_path = CHARTS_DIR / img_name
-                    safe_save_png(fig, img_path)
-                    print(f"📊 Saved top-N chart: {img_path}")
-            else:
-                print(f"ℹ️ No categorical top-10 generated for {name}.")
 
     print(f"✅ Excel report saved to: {excel_path}")
 

@@ -1,5 +1,5 @@
 -- ===========================================
--- 28_bi_view_totals_overview.sql
+-- 28_view_totals_overview.sql
 -- Purpose: Business data insights
 -- ===========================================
 
