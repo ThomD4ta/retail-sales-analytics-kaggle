@@ -54,7 +54,9 @@ MANUAL_CSV_LIST = [
 "17_bi_percentiles_outliers_total_amount.csv",
 "04_view_monthly_mom",
 "05_view_monthly_ytd_performance",
-"06_view_sales_and_customers_mom_ytd"
+"06_view_sales_and_customers_mom_ytd",
+"07_view_product_category_sales_by_month",
+"08_view_sales_and_customers_mom_ytd"
 ]
 
 # =========================================================

@@ -1,0 +1,1 @@
+SELECT * FROM product_category_sales_by_month;
