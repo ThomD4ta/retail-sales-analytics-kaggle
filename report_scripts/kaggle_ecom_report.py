@@ -56,7 +56,8 @@ MANUAL_CSV_LIST = [
 "05_view_monthly_ytd_performance",
 "06_view_sales_and_customers_mom_ytd",
 "07_view_product_category_sales_by_month",
-"08_view_sales_and_customers_mom_ytd"
+"08_view_sales_and_customers_mom_ytd",
+"09_view_percentiles_by_order_amount"
 ]
 
 # =========================================================

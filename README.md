@@ -1,9 +1,12 @@
 # retail-sales-analytics-kaggle
 Case Study: API/html Request + Exploratory Data Analysis + Report + Power BI Dashboard
 
-1. Run sales_to_pgadmin logic
+Main ETL Script: master_report_pipeline.py
+
+1. Run sales_to_pgadmin logic (Kaggle API Request)
 2. Run all BI SQL queries (CSV export)
 3. Run report builder (Excel)
+4. PowerBI Dashboard
 
 [Kaggle Dataset] --> [Sales_to_pgadmin.py] --> [Postgres DB]
                                             \

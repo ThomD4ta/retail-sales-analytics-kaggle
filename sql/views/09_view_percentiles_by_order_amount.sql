@@ -1,0 +1,1 @@
+SELECT * FROM percentiles_by_order_amount;
